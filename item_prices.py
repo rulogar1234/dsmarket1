@@ -19,13 +19,5 @@ precios = pd.read_csv("C:/Users/rsalcedo/OneDrive/Documentos/projects_ds/dsmarke
 #creación de df
 precios.to_sql(name='item_prices', con=connection, if_exists='replace', index=False)
 
-#cursor = connection.cursor()
-#cursor.execute("ALTER TABLE daily_calendar ADD COLUMN yearweek TEXT;")
-#cursor.execute("UPDATE daily_calendar SET yearweek=strftime('%Y%m', date)")
-#cursor.execute("ALTER TABLE daily_calendar ADD COLUMN fecha DATE;")
-#cursor.execute("UPDATE daily_calendar SET fecha = DATE(date);")
-#cursor.execute("ALTER TABLE daily_calendar DROP COLUMN date;")
-#connection.commit()
-
 connection.close()
 print('Desconexión')

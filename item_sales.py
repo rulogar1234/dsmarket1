@@ -1,18 +1,3 @@
-#conexion base de datos SQL Server
-#import pyodbc
-#from sqlalchemy import create_engine
-#server = 'PREVF-SQL03\\MINERVA'
-#database = 'DSMarket'
-#username = 'raul'
-#password = '4321'
-#conn_str = f'mssql+pyodbc://{username}:{password}@{server}/{database}?driver=SQL+Server'
-#try:
-#  engine = create_engine(conn_str, use_setinputsizes=False)
-#  connection = engine.connect()
-#  print('Conexión establecida')
-#except:
-#  print('Error al intentar la conexión')
-
 #conexión base de datos SQL Lite
 import sqlite3
 
