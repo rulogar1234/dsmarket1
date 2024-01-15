@@ -23,9 +23,9 @@ precios.to_sql(name='item_prices2', con=connection, if_exists='replace', index=F
 #cursor = connection.cursor()
 cursor.execute("CREATE TABLE item_prices (item TEXT , category TEXT, store_code TEXT, yearweek TEXT, sell_price REAL);")
 cursor.execute("INSERT INTO item_prices (item,category,store_code,yearweek,sell_price) SELECT item, category, store_code, SUBSTR(CAST (yearweek AS TEXT),0,7), sell_price FROM item_prices2")
+cursor.execute("DROP TABLE item_prices2;")
 
 connection.commit()
-
 
 connection.close()
 print('Desconexión')
