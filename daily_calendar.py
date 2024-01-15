@@ -18,7 +18,7 @@
 import sqlite3
 
 try:
-  connection = sqlite3.connect("C:/Users/rsalcedo/OneDrive/Documentos/projects_ds/dsmarket/data/dsmarket.db")
+  connection = sqlite3.connect("C:/Users/rsalcedo/OneDrive/Documentos/projects_ds/dsmarket/dsmarket1/data/dsmarket.db")
   print('Conexión establecida')
 except:
   print('Error al intentar la conexión')
@@ -26,11 +26,11 @@ try:
     cursor = connection.cursor()
     cursor.execute("DROP TABLE daily_calendar;")
 except:
-   print("Tabla no existe")
+   print("la tabla no existe")
 
 import pandas as pd
 #importación ficheros
-calendario = pd.read_csv("C:/Users/rsalcedo/OneDrive/Documentos/projects_ds/dsmarket/data/daily_calendar_with_events.csv")
+calendario = pd.read_csv("C:/Users/rsalcedo/OneDrive/Documentos/projects_ds/dsmarket/dsmarket1/data/daily_calendar_with_events.csv")
 
 #creación de df
 calendario.to_sql(name='daily_calendar', con=connection, if_exists='replace', index=False)
