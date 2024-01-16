@@ -24,7 +24,7 @@ store_code = ventas['store_code'].isnull().any()
 if item == True | store_code == True:
   print("Tratar nulos")
 
-#mirammos los datos ya cargados
+#miramos los datos ya cargados
 q = """
 SELECT DISTINCT(item)
 FROM item_sales
@@ -76,7 +76,7 @@ for i in range(max_productos):
   if cargado.empty == True:
     for j in range(max_dies):
       #no cargamos las ventas 0
-      if ventas.iloc[i, 7 + j] != 0:
+      if (ventas.iloc[i, 7 + j] != 0 | ventas.iloc[i, 7 + j] == null):
         ventas2.loc[x] = [ventas.iloc[i, 1], ventas.iloc[i, 5], ventas.columns[7+j], ventas.iloc[i, 7+j]]
       x += 1
     # Verificamos si tenemos que crear la tabla o la tenemos ya lista para seguri añadiendo filas
