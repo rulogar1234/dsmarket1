@@ -15,6 +15,15 @@ ventas = pd.read_csv("C:/Users/rsalcedo/OneDrive/Documentos/projects_ds/dsmarket
 #ordernamos el dataframe por item (no por id)
 ventas = ventas.sort_values(by='item', ascending=True)
 
+#Exploración y limpieza
+#miramos duplicados
+print(ventas[ventas.duplicated(keep=False)])
+#no existen, tratamos nulos
+item = ventas['item'].isnull().any()
+store_code = ventas['store_code'].isnull().any()
+if item == True | store_code == True:
+  print("Tratar nulos")
+
 #mirammos los datos ya cargados
 q = """
 SELECT DISTINCT(item)
