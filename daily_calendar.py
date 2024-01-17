@@ -30,17 +30,25 @@ except:
 
 import pandas as pd
 #importación ficheros
-calendario = pd.read_csv("C:/Users/rsalcedo/OneDrive/Documentos/projects_ds/dsmarket/dsmarket1/data/daily_calendar_with_events.csv")
+columna_tipos = {'date': 'str', 'weekday': 'str', 'weekday_int': 'int', 'd': 'str', 'event': 'str'}
+calendario = pd.read_csv("C:/Users/rsalcedo/OneDrive/Documentos/projects_ds/dsmarket/dsmarket1/data/daily_calendar_with_events.csv", dtype=columna_tipos)
+
+#miramos duplicados
+print(calendario.isnull().sum())
+
+#miramos nulos
+date = calendario['date'].isnull().any()
+weekday = calendario['weekday'].isnull().any()
+weekday_int = calendario['weekday_int'].isnull().any()
+d = calendario['d'].isnull().any()
+#no hay nulos, solo en events
+
+calendario['yearweek'] = calendario['date'].str.slice(0, 4) + calendario['date'].str.slice(5, 7)
+
+calendario['date'] = pd.to_datetime(calendario['date']).apply(lambda x: x.strftime('%Y-%m-%d'))
 
 #creación de df
 calendario.to_sql(name='daily_calendar', con=connection, if_exists='replace', index=False)
-
-cursor = connection.cursor()
-cursor.execute("ALTER TABLE daily_calendar ADD COLUMN yearweek TEXT;")
-cursor.execute("UPDATE daily_calendar SET yearweek=strftime('%Y%m', date)")
-cursor.execute("ALTER TABLE daily_calendar ADD COLUMN fecha DATE;")
-cursor.execute("UPDATE daily_calendar SET fecha = DATE(date);")
-cursor.execute("ALTER TABLE daily_calendar DROP COLUMN date;")
 connection.commit()
 
 connection.close()
